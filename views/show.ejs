@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Questions</title>
+        <link rel="stylesheet" href="/style.css" />
+    </head>
+    <body>
+        <h1>All questions</h1>
+        <form action="/questions/new">
+            <button>Create a new question</button>
+        </form>
+        <br />
+        <form action="/questions/reinitializedb">
+            <button type="submit">Reinitialize Database</button>
+        </form>
+        <ol>
+            <% for (let question of allQuestions) { %>
+            <li>
+                <ul>
+                    <li>Question Id: <%= question._id %></li>
+                    <li>Type: <%= question.type %></li>
+                    <li>Question: <%= question.question %></li>
+                    <li>Answer: <%= question.answer %></li>
+                </ul>
+                <div>
+                    <form action="/questions/edit/<%= question._id %>" method="GET">
+                        <button class="edit-button" type="submit">Edit</button>
+                    </form>
+                    <form action="/questions/delete/<%= question._id %>?_method=DELETE" method="POST">
+                        <button class="delete-button" type="submit">Delete</button>
+                    </form>
+                </div>
+            </li>
+            <br />
+            <% } %>
+        </ol>
+    </body>
+</html>
